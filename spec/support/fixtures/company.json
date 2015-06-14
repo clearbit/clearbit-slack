@@ -1,0 +1,78 @@
+{
+  "id": "81be4a63-4c59-4fcd-82bd-3a5d8982d3ea",
+  "name": "Clearbit",
+  "legalName": null,
+  "domain": "clearbit.com",
+  "domainAliases": [
+
+  ],
+  "url": "http://clearbit.com",
+  "site": {
+    "url": "http://clearbit.com",
+    "title": "Clearbit",
+    "h1": "Clearbit builds business intelligence...",
+    "metaDescription": "Clearbit provides Business Intelligence APIs",
+    "metaAuthor": null
+  },
+  "categories": [
+
+  ],
+  "description": "We are building a suite of business intelligence APIs to help companies find more information on their customers in order to increase sales and reduce fraud. Our goal is to be the data backbone for modern businesses, powering everything from credit checks to lead scoring.\n\nWe currently provide three APIs:\n\n- Person API: Takes an email address and returns information about a person such as name, avatar, title, and social accounts.\n- Company API: Takes a domain name and returns data about a company, such as name, logo, market category, and headcount.\n- Watchlist API: Lets you search names against a consolidate global watchlist, simplifying OFAC compliance.\n\nOur customers mainly use our APIs for lead-scoring, processing all their incoming leads through both the Person and Company APIs to determine which ones are valuable. This saves sales teams a great deal of time compared to manual lead research and qualification. ",
+  "founders": [
+
+  ],
+  "raised": null,
+  "location": "601 4th Street #310, San Francisco, CA 94107, USA",
+  "geo": {
+    "streetNumber": "601",
+    "streetName": "4th Street",
+    "subPremise": "310",
+    "city": "San Francisco",
+    "state": "California",
+    "country": "United States",
+    "postalCode": "94107",
+    "lat": 37.7783221,
+    "lng": -122.3961129
+  },
+  "employees": 10,
+  "logo": "https://dqus23xyrtg1i.cloudfront.net/v1/logos/81be4a63-4c59-4fcd-82bd-3a5d8982d3ea",
+  "google": {
+    "rank": null
+  },
+  "alexa": {
+    "usRank": 112085,
+    "globalRank": 155864
+  },
+  "facebook": {
+    "handle": null,
+    "likes": null
+  },
+  "linkedin": {
+    "handle": "company/clearbit"
+  },
+  "twitter": {
+    "handle": "clearbit",
+    "id": "2857311332",
+    "bio": "Business Intelligence APIs",
+    "followers": 271,
+    "following": 18,
+    "location": "San Francisco",
+    "site": "https://t.co/r06mCbdPuR",
+    "avatar": "https://pbs.twimg.com/profile_images/557204249411457024/B0Nb_vTU_normal.png"
+  },
+  "angellist": {
+    "id": 529390,
+    "handle": "clearbit",
+    "description": "We are building a suite of business intelligence APIs to help companies find more information on their customers in order to increase sales and reduce fraud. Our goal is to be the data backbone for modern businesses, powering everything from credit checks to lead scoring.\n\nWe currently provide three APIs:\n\n- Person API: Takes an email address and returns information about a person such as name, avatar, title, and social accounts.\n- Company API: Takes a domain name and returns data about a company, such as name, logo, market category, and headcount.\n- Watchlist API: Lets you search names against a consolidate global watchlist, simplifying OFAC compliance.\n\nOur customers mainly use our APIs for lead-scoring, processing all their incoming leads through both the Person and Company APIs to determine which ones are valuable. This saves sales teams a great deal of time compared to manual lead research and qualification. ",
+    "followers": 184,
+    "blogUrl": "http://blog.clearbit.com"
+  },
+  "crunchbase": {
+    "handle": null
+  },
+  "emailProvider": false,
+  "type": "private",
+  "ticker": null,
+  "phone": null,
+  "personal": false
+}

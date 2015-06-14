@@ -1,7 +1,8 @@
-# Clearbit Slack Notifications
+# Clearbit Slack
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/clearbit/slack`. To experiment with that code, run `bin/console` for an interactive prompt.
+Send Clearbit person and company information into a Slack channel.
 
+![alex_test](https://cloud.githubusercontent.com/assets/739782/8149387/3f89cd68-1276-11e5-863c-5529237bfe6c.png)
 
 ## Installation
 

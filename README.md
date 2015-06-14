@@ -1,10 +1,10 @@
-# Clearbit::Slack
+# Clearbit Slack Notifier
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/clearbit/slack`. To experiment with that code, run `bin/console` for an interactive prompt.
+Send Clearbit data into a Slack channel:
 
-TODO: Delete this and the text above, and describe your gem
+![alex_test](https://cloud.githubusercontent.com/assets/739782/8149387/3f89cd68-1276-11e5-863c-5529237bfe6c.png)
 
-## Installation
+### Installation
 
 Add this line to your application's Gemfile:
 
@@ -16,19 +16,72 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
+### Configuration
 
-    $ gem install clearbit-slack
+Add Clearbit and Slack config vars:
 
-## Usage
+```ruby
+# config/initializers/clearbit.rb
+Clearbit::Slack.configure do |config|
+  config.slack_url = ENV['SLACK_URL']
+  config.slack_channel = '#test'
+  config.default_avatar = 'https://placekitten.com/g/75/75'
+  config.clearbit_key = ENV['CLEARBIT_KEY']
+end
+```
 
-TODO: Write usage instructions here
+### Streaming API
 
-## Development
+Lookup and notify using the streaming API from a background job:
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+# app/jobs/signup_notification.rb
+module APIHub
+  module Jobs
+    class SignupNotification
+      include Sidekiq::Worker
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+      def perform(customer_id)
+        customer = Customer.find!(customer_id)
+        response = Clearbit::Slack::Streaming.lookup(
+          email:      customer.email,
+          first_name: customer.first_name,
+          last_name:  customer.last_name,
+          message:    "View signup in <https://admin-panel.com/#{customer.token}|Admin Panel>"
+        )
+
+        # ...
+      end
+    end
+  end
+end
+```
+
+_Note:_ The `first_name`, `last_name`, and `message` are optional. However, providing the additional fields will help create more robust Slack notifications if Clearbit data is not found.
+
+### Webhooks
+
+Use the notifier directly when processing webhooks with a Clearbit response:
+
+```ruby
+# app/controllers/webhooks_controller.rb
+class WebhooksController < ApplicationController
+  def clearbit
+    webhook = Clearbit::Webhook.new(env)
+
+    if webhook.body.person || webhook.body.company
+      notification = Clearbit::Slack::Notification.new(
+        person: webhook.body.person,
+        company: webhook.body.company
+      )
+
+      notification.ping("View signup in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>")
+    end
+
+    # ...
+  end
+end
+```
 
 ## Contributing
 

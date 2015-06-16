@@ -1,6 +1,6 @@
 module Clearbit
   module Slack
-    class Notification
+    class Notifier
       attr_reader :person, :company, :first_name, :last_name
 
       def initialize(attrs = {})

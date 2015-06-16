@@ -3,7 +3,7 @@ require 'slack-notifier'
 
 require 'clearbit/slack/configuration'
 require 'clearbit/slack/helpers'
-require 'clearbit/slack/notification'
+require 'clearbit/slack/notifier'
 require 'clearbit/slack/streaming'
 require 'clearbit/slack/version'
 require 'clearbit/slack/attachments/person'
@@ -11,6 +11,10 @@ require 'clearbit/slack/attachments/company'
 
 module Clearbit
   module Slack
+    def self.lookup(attrs = {})
+      Streaming.lookup(attrs)
+    end
+
     def self.slack_url
       configuration.slack_url || raise('Config Error: No slack_url provided')
     end

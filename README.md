@@ -47,10 +47,10 @@ module APIHub
 
       def perform(customer_id)
         customer = Customer.find!(customer_id)
-        response = Clearbit::Slack::Streaming.lookup(
+        response = Clearbit::Slack.lookup(
           email:      customer.email,
-          first_name: customer.first_name,
-          last_name:  customer.last_name,
+          given_name: customer.first_name,
+          family_name:  customer.last_name,
           message:    "View signup in <https://admin-panel.com/#{customer.token}|Admin Panel>"
         )
 
@@ -74,12 +74,12 @@ class WebhooksController < ApplicationController
     webhook = Clearbit::Webhook.new(env)
 
     if webhook.body.person || webhook.body.company
-      notification = Clearbit::Slack::Notification.new(
+      notifier = Clearbit::Slack::Notifier.new(
         person: webhook.body.person,
         company: webhook.body.company
       )
 
-      notification.ping("View signup in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>")
+      notifier.ping("View signup in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>")
     end
 
     # ...

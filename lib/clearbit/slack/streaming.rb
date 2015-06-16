@@ -3,18 +3,15 @@ module Clearbit
     module Streaming
       def self.lookup(options = {})
         message = options[:message] || options[:email]
-        first_name = options[:first_name]
-        last_name = options[:last_name]
-
         response = Clearbit::Streaming::PersonCompany[email: options[:email]]
 
-        notification = Slack::Notification.new(
+        notifier_params = options.merge(
           person: response.person,
-          company: response.company,
-          first_name: first_name,
-          last_name: last_name
+          company: response.company
         )
-        notification.ping(message)
+
+        notifier = Slack::Notifier.new(notifier_params)
+        notifier.ping(message)
 
         response
       end

@@ -30,7 +30,7 @@ Clearbit::Slack.configure do |config|
 end
 ```
 
-The `default_icon_url` will be used when no avatar is found for the person:
+The `default_icon_url` will be used when `person.avatar` is blank:
 
 ![screen shot 2015-06-15 at 7 34 48 pm](https://cloud.githubusercontent.com/assets/739782/8174770/ba4ad806-1395-11e5-9298-6f7479f1cdfb.png)
 
@@ -51,7 +51,7 @@ module APIHub
           email: customer.email,
           given_name: customer.first_name,
           family_name: customer.last_name,
-          message: "View signup in <https://admin-panel.com/#{customer.token}|Admin Panel>"
+          message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>"
         )
 
         # ...
@@ -61,7 +61,7 @@ module APIHub
 end
 ```
 
-_Note:_ The `first_name`, `last_name`, and `message` are optional. However, providing the additional fields will help create more robust Slack notifications if Clearbit data is not found.
+_Note:_ The `first_name`, `last_name`, and `message` are optional. However, providing the additional fields will help create more robust Slack notifications when person data is not found.
 
 ### Webhooks
 
@@ -79,7 +79,7 @@ class WebhooksController < ApplicationController
         company: webhook.body.company
       )
 
-      notifier.ping("View signup in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>")
+      notifier.ping("View details in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>")
     end
 
     # ...

@@ -32,7 +32,7 @@ module Clearbit
       private
 
       def icon_url
-        person && person.avatar || Slack.default_avatar
+        person && person.avatar || Slack.default_icon_url
       end
 
       def username
@@ -45,7 +45,7 @@ module Clearbit
         elsif first_name || last_name
           [first_name, last_name].join(' ')
         else
-          Slack.default_username
+          'Unknown'
         end
       end
 

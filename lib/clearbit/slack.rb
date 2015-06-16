@@ -19,12 +19,8 @@ module Clearbit
       configuration.slack_channel || raise('Config Error: No slack_channel provided')
     end
 
-    def self.default_avatar
-      configuration.default_avatar || ''
-    end
-
-    def self.default_username
-      configuration.default_username || 'Unknown'
+    def self.default_icon_url
+      configuration.default_icon_url || ''
     end
 
     def self.configure

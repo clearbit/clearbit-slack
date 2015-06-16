@@ -42,10 +42,10 @@ module APIHub
       def perform(customer_id)
         customer = Customer.find!(customer_id)
         response = Clearbit::Slack::Streaming.lookup(
-          email:      customer.email,                                           # required
-          first_name: customer.first_name,                                      # optional
-          last_name:  customer.last_name,                                       # optional
-          message:    "View signup in <https://admin.example.com/|Admin Panel>" # optional
+          email:      customer.email,
+          first_name: customer.first_name,
+          last_name:  customer.last_name,
+          message:    "View signup in <https://admin-panel.com/#{customer.token}|Admin Panel>"
         )
 
         # ...

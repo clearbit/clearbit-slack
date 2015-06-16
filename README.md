@@ -48,10 +48,10 @@ module APIHub
       def perform(customer_id)
         customer = Customer.find!(customer_id)
         response = Clearbit::Slack.lookup(
-          email:      customer.email,
+          email: customer.email,
           given_name: customer.first_name,
-          family_name:  customer.last_name,
-          message:    "View signup in <https://admin-panel.com/#{customer.token}|Admin Panel>"
+          family_name: customer.last_name,
+          message: "View signup in <https://admin-panel.com/#{customer.token}|Admin Panel>"
         )
 
         # ...

@@ -62,16 +62,18 @@ _Note:_ The `first_name`, `last_name`, and `message` are optional. However, prov
 Use the Combined Lookup API with webhooks:
 
 ```ruby
-class WebhookController < ApplicationController
+# app/controllers/webhooks_controller.rb
+class WebhooksController < ApplicationController
   def clearbit
     webhook = Clearbit::Webhook.new(env)
 
     if webhook.body.person || webhook.body.company
-      options = {
-        message: "View signup in <https://admin.example.com/#{webhook.webhook_id}|Admin Panel>"
-      }
+      notification = Clearbit::Slack::Notification.new(
+        person: webhook.body.person,
+        company: webhook.body.company
+      )
 
-      Clearbit::Slack.notify(webhook.body.person, webhook.body.company, options)
+      notification.ping("View signup in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>")
     end
 
     # ...

@@ -21,10 +21,12 @@ And then execute:
 Set up Slack config vars:
 
 ```ruby
+# config/initializers/clearbit.rb
 Clearbit::Slack.configure do |config|
   config.slack_url = ENV['SLACK_URL']
   config.slack_channel = '#test'
   config.default_avatar = 'https://placekitten.com/g/75/75'
+  config.clearbit_key = ENV['CLEARBIT_KEY']
 end
 ```
 

@@ -25,10 +25,14 @@ Add Clearbit and Slack config vars:
 Clearbit::Slack.configure do |config|
   config.slack_url = ENV['SLACK_URL']
   config.slack_channel = '#test'
-  config.default_avatar = 'https://placekitten.com/g/75/75'
+  config.default_icon_url = 'https://placekitten.com/g/75/75'
   config.clearbit_key = ENV['CLEARBIT_KEY']
 end
 ```
+
+The `default_icon_url` will be used when no avatar is found for the person:
+
+![screen shot 2015-06-15 at 7 34 48 pm](https://cloud.githubusercontent.com/assets/739782/8174770/ba4ad806-1395-11e5-9298-6f7479f1cdfb.png)
 
 ### Streaming API
 

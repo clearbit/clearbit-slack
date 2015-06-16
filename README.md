@@ -34,6 +34,20 @@ The `default_icon_url` will be used when `person.avatar` is blank:
 
 ![screen shot 2015-06-15 at 7 34 48 pm](https://cloud.githubusercontent.com/assets/739782/8174770/ba4ad806-1395-11e5-9298-6f7479f1cdfb.png)
 
+### Parameters
+
+Required:
+
+* email
+
+Optional:
+
+* family_name
+* given_name
+* message
+
+_Note:_ Although the `first_name` and `last_name` are optional we recommend passing the fields as it will help create more robust Slack notifications when person data is not found.
+
 ### Streaming API
 
 Lookup and notify using the streaming API from a background job:
@@ -60,8 +74,6 @@ module APIHub
   end
 end
 ```
-
-_Note:_ The `first_name`, `last_name`, and `message` are optional. However, providing the additional fields will help create more robust Slack notifications when person data is not found.
 
 ### Webhooks
 

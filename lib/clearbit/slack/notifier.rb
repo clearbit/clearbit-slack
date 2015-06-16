@@ -10,7 +10,7 @@ module Clearbit
         @person = attrs[:person]
       end
 
-      def ping(message)
+      def ping(message = '')
         notifier = ::Slack::Notifier.new(
           Slack.slack_url,
           channel: Slack.slack_channel,

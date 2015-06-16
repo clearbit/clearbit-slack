@@ -42,11 +42,15 @@ Required:
 
 Optional:
 
-* family_name
 * given_name
+* family_name
 * message
 
-_Note:_ Although the `first_name` and `last_name` are optional we recommend passing the fields as it will help create more robust Slack notifications when person data is not found.
+_Note:_ Although the `given_name` and `family_name` are optional we recommend passing the fields as it will help create more robust Slack notifications when person data is not found.
+
+Use the `message` field to link into an external Admin/CRM:
+
+![message with CRM link](https://cloud.githubusercontent.com/assets/739782/8175048/705dbf3e-1399-11e5-8192-e2a056727446.png)
 
 ### Streaming API
 

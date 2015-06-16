@@ -1,6 +1,6 @@
 # Clearbit Slack Notifier
 
-Send Clearbit data into a Slack channel.
+Send Clearbit data into a Slack channel:
 
 ![alex_test](https://cloud.githubusercontent.com/assets/739782/8149387/3f89cd68-1276-11e5-863c-5529237bfe6c.png)
 
@@ -18,7 +18,7 @@ And then execute:
 
 ### Configuration
 
-Set up Slack config vars:
+Add Clearbit and Slack config vars:
 
 ```ruby
 # config/initializers/clearbit.rb
@@ -61,7 +61,7 @@ _Note:_ The `first_name`, `last_name`, and `message` are optional. However, prov
 
 ### Webhooks
 
-Use the Combined Lookup API with webhooks:
+Use the notifier directly when processing webhooks with a Clearbit response:
 
 ```ruby
 # app/controllers/webhooks_controller.rb

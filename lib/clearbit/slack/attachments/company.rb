@@ -30,12 +30,18 @@ module Clearbit
             website,
             raised,
             location,
+            type,
             employees,
             angellist(company.angellist),
             facebook(company.facebook),
             linkedin(company.linkedin),
             twitter(company.twitter),
           ]
+        end
+
+        def type
+          return unless company.type
+          field 'Type', company.type
         end
 
         def employees

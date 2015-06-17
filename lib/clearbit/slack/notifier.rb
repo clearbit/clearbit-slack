@@ -33,7 +33,7 @@ module Clearbit
       private
 
       def icon_url
-        person && person.avatar || Slack.default_icon_url
+        person && person.avatar || ''
       end
 
       def username

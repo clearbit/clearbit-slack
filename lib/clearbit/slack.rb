@@ -21,10 +21,6 @@ module Clearbit
       configuration.slack_channel || raise('Config Error: No slack_channel provided')
     end
 
-    def self.default_icon_url
-      configuration.default_icon_url || ''
-    end
-
     def self.configure
       yield configuration if block_given?
     end

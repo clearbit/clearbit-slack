@@ -24,17 +24,12 @@ Clearbit.key = ENV['CLEARBIT_KEY']
 Clearbit::Slack.configure do |config|
   config.slack_url = ENV['SLACK_URL']
   config.slack_channel = '#test'
-  config.default_icon_url = 'https://placekitten.com/g/75/75'
 end
 ```
 
 #### Clearbit Key
 
 Sign up for a [Free Trail](https://clearbit.com/) if you don't already have a Clearbit key.
-
-#### Default Icon URL
-
-The `default_icon_url` will be used when `person.avatar` is blank.
 
 ![screen shot 2015-06-15 at 7 34 48 pm](https://cloud.githubusercontent.com/assets/739782/8174770/ba4ad806-1395-11e5-9298-6f7479f1cdfb.png)
 

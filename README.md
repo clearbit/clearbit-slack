@@ -1,20 +1,17 @@
 # Clearbit Slack Notifier
 
-Send Clearbit data into a Slack channel:
+Send Clearbit Person and Company data into a Slack channel.
 
 ![alex_test](https://cloud.githubusercontent.com/assets/739782/8149387/3f89cd68-1276-11e5-863c-5529237bfe6c.png)
 
-### Installation
+## Installation
 
-Add this line to your application's Gemfile:
+Add to your application's Gemfile:
 
 ```ruby
+gem 'clearbit'
 gem 'clearbit-slack'
 ```
-
-And then execute:
-
-    $ bundle
 
 ### Configuration
 
@@ -22,35 +19,41 @@ Add Clearbit and Slack config vars:
 
 ```ruby
 # config/initializers/clearbit.rb
+Clearbit.key = ENV['CLEARBIT_KEY']
+
 Clearbit::Slack.configure do |config|
   config.slack_url = ENV['SLACK_URL']
   config.slack_channel = '#test'
   config.default_icon_url = 'https://placekitten.com/g/75/75'
-  config.clearbit_key = ENV['CLEARBIT_KEY']
 end
 ```
 
-The `default_icon_url` will be used when `person.avatar` is blank:
+#### Clearbit Key
+
+Sign up for a [Free Trail](https://clearbit.com/) if you don't already have a Clearbit key.
+
+#### Default Icon URL
+
+The `default_icon_url` will be used when `person.avatar` is blank.
 
 ![screen shot 2015-06-15 at 7 34 48 pm](https://cloud.githubusercontent.com/assets/739782/8174770/ba4ad806-1395-11e5-9298-6f7479f1cdfb.png)
 
+
+## Notifications
+
 ### Parameters
 
-Required:
-
-* email
-
-Optional:
-
-* message
-* given_name
-* family_name
-
-Use the `message` field to link into an internal Admin/CRM too. Pass `given_name` and `family_name` to create more robust Slack notifications when person data is not found.
+| Field       | Description                                        |
+| ----------- | -------------------------------------------------- |
+| company     | Company data returned from Clearbit                |
+| person      | Person data returned form Clearbit                 |
+| message     | Used for deep link into an internal Admin/CRM      |
+| given_name  | Used to augment message data when Person not found |
+| family_name | Used to augment message data when Person not found |
 
 ### Streaming API
 
-Lookup and notify using the streaming API from a background job:
+Lookup email using the Clearbit streaming API and ping Slack channel:
 
 ```ruby
 # app/jobs/signup_notification.rb
@@ -61,14 +64,21 @@ module APIHub
 
       def perform(customer_id)
         customer = Customer.find!(customer_id)
-        response = Clearbit::Slack.lookup(
-          email: customer.email,
-          given_name: customer.first_name,
-          family_name: customer.last_name,
-          message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>"
-        )
+        response = Clearbit::Streaming::PersonCompany[email: customer.email]
 
-        # ...
+        if response.person || response.company
+          params = {
+            company: response.company,
+            family_name: customer.last_name,
+            given_name: customer.first_name,
+            message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
+            person: response.person
+          }
+
+          Clearbit::Slack.ping(params)
+        end
+
+        # Persist Clearbit Data
       end
     end
   end
@@ -77,24 +87,28 @@ end
 
 ### Webhooks
 
-Use the notifier directly when processing webhooks with a Clearbit response:
+Receive a webhook with Clearbit data and ping Slack channel:
 
 ```ruby
 # app/controllers/webhooks_controller.rb
 class WebhooksController < ApplicationController
   def clearbit
     webhook = Clearbit::Webhook.new(env)
+    customer = Customer.find!(webhook.webhook_id)
 
     if webhook.body.person || webhook.body.company
-      notifier = Clearbit::Slack::Notifier.new(
-        person: webhook.body.person,
-        company: webhook.body.company
-      )
+      params = {
+        company: webhook.body.company,
+        family_name: customer.last_name,
+        given_name: customer.first_name,
+        message: "View details in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>",
+        person: webhook.body.person
+      }
 
-      notifier.ping("View details in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>")
+      Clearbit::Slack.ping(params)
     end
 
-    # ...
+    # Persist Clearbit Data
   end
 end
 ```

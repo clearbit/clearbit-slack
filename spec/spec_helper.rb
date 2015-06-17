@@ -2,6 +2,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'clearbit/slack'
 require 'pry'
+require 'hashie'
 
 Dir[File.expand_path('spec/support/**/*.rb')].each { |file| require file }
 

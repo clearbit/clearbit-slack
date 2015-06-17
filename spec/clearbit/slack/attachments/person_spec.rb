@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe Clearbit::Slack::Attachments::Person, '#as_json' do
   it 'returns a person attachment' do
-    person = Clearbit::Person.new(person_data)
+    person_data = parsed_fixture_data 'person.json'
+    person = Hashie::Mash.new(person_data)
 
     result = Clearbit::Slack::Attachments::Person.new(person).as_json
 
@@ -21,9 +22,5 @@ describe Clearbit::Slack::Attachments::Person, '#as_json' do
        {:title=>"Twitter", :value=>"<http://twitter.com/maccaw|@maccaw> (15,248 followers)", :short=>true}
       ]
     })
-  end
-
-  def person_data
-    parsed_fixture_data('person.json')
   end
 end

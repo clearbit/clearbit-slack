@@ -1,16 +1,17 @@
 module Clearbit
   module Slack
     class Notifier
-      attr_reader :person, :company, :first_name, :last_name
+      attr_reader :company, :first_name, :last_name, :message, :person
 
       def initialize(attrs = {})
         @company = attrs[:company]
         @first_name = attrs[:first_name]
         @last_name = attrs[:last_name]
+        @message = attrs[:message]
         @person = attrs[:person]
       end
 
-      def ping(message = '')
+      def ping
         notifier = ::Slack::Notifier.new(
           Slack.slack_url,
           channel: Slack.slack_channel,

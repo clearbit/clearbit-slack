@@ -31,9 +31,6 @@ end
 
 Sign up for a [Free Trail](https://clearbit.com/) if you don't already have a Clearbit key.
 
-![screen shot 2015-06-15 at 7 34 48 pm](https://cloud.githubusercontent.com/assets/739782/8174770/ba4ad806-1395-11e5-9298-6f7479f1cdfb.png)
-
-
 ## Notifications
 
 ### Parameters

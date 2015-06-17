@@ -27,9 +27,9 @@ Clearbit::Slack.configure do |config|
 end
 ```
 
-#### Clearbit Key
+### Clearbit Key
 
-Sign up for a [Free Trail](https://clearbit.com/) if you don't already have a Clearbit key.
+Sign up for a [Free Trial](https://clearbit.com/) if you don't already have a Clearbit key.
 
 ## Notifications
 

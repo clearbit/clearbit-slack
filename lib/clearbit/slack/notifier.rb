@@ -1,12 +1,12 @@
 module Clearbit
   module Slack
     class Notifier
-      attr_reader :company, :first_name, :last_name, :message, :person
+      attr_reader :company, :given_name, :family_name, :message, :person
 
       def initialize(attrs = {})
         @company = attrs[:company]
-        @first_name = attrs[:first_name]
-        @last_name = attrs[:last_name]
+        @family_name = attrs[:family_name]
+        @given_name = attrs[:given_name]
         @message = attrs[:message]
         @person = attrs[:person]
       end
@@ -43,8 +43,8 @@ module Clearbit
           elsif person.name.given_name && person.name.family_name
             [person.name.given_name, person.name.family_name].join(' ')
           end
-        elsif first_name || last_name
-          [first_name, last_name].join(' ')
+        elsif given_name || family_name
+          [given_name, family_name].join(' ')
         else
           'Unknown'
         end

@@ -23,7 +23,7 @@ Clearbit.key = ENV['CLEARBIT_KEY']
 
 Clearbit::Slack.configure do |config|
   config.slack_url = ENV['SLACK_URL']
-  config.slack_channel = '#test'
+  config.slack_channel = '#signups'
 end
 ```
 

@@ -44,12 +44,12 @@ module Clearbit
         end
 
         def employment
-          return unless person.employment.name
+          return unless person.employment && person.employment.name
           field 'Employment', person.employment.name
         end
 
         def position
-          return unless person.employment.title
+          return unless person.employment && person.employment.title
           field 'Position', person.employment.title
         end
 

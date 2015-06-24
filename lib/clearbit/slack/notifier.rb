@@ -1,14 +1,15 @@
 module Clearbit
   module Slack
     class Notifier
-      attr_reader :company, :given_name, :family_name, :message, :person
+      attr_reader :company, :message, :person, :given_name, :family_name, :email
 
       def initialize(attrs = {})
         @company = attrs[:company]
-        @family_name = attrs[:family_name]
-        @given_name = attrs[:given_name]
         @message = attrs[:message]
         @person = attrs[:person]
+        @given_name = attrs[:given_name]
+        @family_name = attrs[:family_name]
+        @email = attrs[:email]
       end
 
       def ping
@@ -19,15 +20,13 @@ module Clearbit
           username: username
         )
 
-        if person
-          attachments << Attachments::Person.new(person).as_json
-        end
+        attachments << Attachments::Person.new(person).as_json
 
         if company
           attachments << Attachments::Company.new(company).as_json
         end
 
-        notifier.ping message, attachments: attachments
+        notifier.ping message.to_s, attachments: attachments
       end
 
       private
@@ -37,17 +36,27 @@ module Clearbit
       end
 
       def username
-        if person
-          if person.name.full_name
-            person.name.full_name
-          elsif person.name.given_name && person.name.family_name
-            [person.name.given_name, person.name.family_name].join(' ')
-          end
-        elsif given_name || family_name
-          [given_name, family_name].join(' ')
+        if person.name.full_name
+          person.name.full_name
+        elsif person.name.given_name && person.name.family_name
+          [person.name.given_name, person.name.family_name].join(' ')
         else
           'Unknown'
         end
+      end
+
+      def person
+        @person ||= unknown_person
+      end
+
+      def unknown_person
+        Mash.new(
+          email: email,
+          name: {
+            given: given_name,
+            family: family_name
+          }
+        )
       end
 
       def attachments

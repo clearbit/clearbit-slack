@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Clearbit::Slack::Attachments::Company, '#as_json' do
   it 'returns a company attachment' do
     company_data = parsed_fixture_data 'company.json'
-    company = Hashie::Mash.new(company_data)
+    company = Mash.new(company_data)
 
     result = Clearbit::Slack::Attachments::Company.new(company).as_json
 

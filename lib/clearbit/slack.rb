@@ -1,4 +1,5 @@
 require 'slack-notifier'
+require 'mash'
 
 require 'clearbit/slack/configuration'
 require 'clearbit/slack/helpers'

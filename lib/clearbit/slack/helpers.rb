@@ -23,7 +23,7 @@ module Clearbit
       end
 
       def aboutme(aboutme)
-        return unless aboutme.handle
+        return unless aboutme && aboutme.handle
         value = link(
           "https://about.me/#{aboutme.handle}",
           aboutme.handle
@@ -32,7 +32,7 @@ module Clearbit
       end
 
       def angellist(angellist)
-        return unless angellist.handle
+        return unless angellist && angellist.handle
         value = link(
           "https://angel.co/#{angellist.handle}",
           angellist.handle,
@@ -42,7 +42,7 @@ module Clearbit
       end
 
       def github(github)
-        return unless github.handle
+        return unless github && github.handle
         value = link(
           "https://github.com/#{github.handle}",
           github.handle,
@@ -52,7 +52,7 @@ module Clearbit
       end
 
       def facebook(facebook)
-        return unless facebook.handle
+        return unless facebook && facebook.handle
         value = link(
           "https://www.facebook.com/#{facebook.handle}",
           facebook.handle
@@ -61,7 +61,7 @@ module Clearbit
       end
 
       def twitter(twitter)
-        return unless twitter.handle
+        return unless twitter && twitter.handle
         value = link(
           "http://twitter.com/#{twitter.handle}",
           "@#{twitter.handle}",
@@ -71,7 +71,7 @@ module Clearbit
       end
 
       def linkedin(linkedin)
-        return unless linkedin.handle
+        return unless linkedin && linkedin.handle
         value = link(
           "https://www.linkedin.com/#{linkedin.handle}",
           linkedin.handle

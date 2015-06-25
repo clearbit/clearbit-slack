@@ -64,7 +64,7 @@ module Clearbit
         return unless twitter && twitter.handle
         value = link(
           "http://twitter.com/#{twitter.handle}",
-          "@#{twitter.handle}",
+          twitter.handle,
           twitter.followers
         )
         field 'Twitter', value

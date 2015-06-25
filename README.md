@@ -9,7 +9,6 @@ Clean beautiful customer data. Now in Slack.
 Add to your application's Gemfile:
 
 ```ruby
-gem 'clearbit'
 gem 'clearbit-slack'
 ```
 
@@ -59,20 +58,16 @@ module APIHub
         customer = Customer.find!(customer_id)
         response = Clearbit::Streaming::PersonCompany[email: customer.email]
 
-        if response.person || response.company
-          params = {
-            company: response.company,
-            email: customer.email,
-            family_name: customer.last_name,
-            given_name: customer.first_name,
-            message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
-            person: response.person
-          }
+        response.merge!(
+          email: customer.email,
+          family_name: customer.last_name,
+          given_name: customer.first_name,
+          message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
+        )
 
-          Clearbit::Slack.ping(params)
-        end
+        Clearbit::Slack.ping(response)
 
-        # Persist Clearbit Data
+        # Persist the Clearbit Data
       end
     end
   end
@@ -89,21 +84,18 @@ class WebhooksController < ApplicationController
   def clearbit
     webhook = Clearbit::Webhook.new(env)
     customer = Customer.find!(webhook.webhook_id)
+    response =  webhook.body
 
-    if webhook.body.person || webhook.body.company
-      params = {
-        company: webhook.body.company,
-        email: customer.email,
-        family_name: customer.last_name,
-        given_name: customer.first_name,
-        message: "View details in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>",
-        person: webhook.body.person
-      }
+    response.merge!(
+      email: customer.email,
+      family_name: customer.last_name,
+      given_name: customer.first_name,
+      message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
+    )
 
-      Clearbit::Slack.ping(params)
-    end
+    Clearbit::Slack.ping(response)
 
-    # Persist Clearbit Data
+    # Persist the Clearbit Data
   end
 end
 ```

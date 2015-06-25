@@ -1,6 +1,6 @@
 # Clearbit Slack Notifier
 
-Send Clearbit Person and Company data into a Slack channel.
+Clean beautiful customer data. Now in Slack.
 
 ![alex_test](https://cloud.githubusercontent.com/assets/739782/8149387/3f89cd68-1276-11e5-863c-5529237bfe6c.png)
 

@@ -40,6 +40,7 @@ Sign up for a [Free Trial](https://clearbit.com/) if you don't already have a Cl
 | company     | Company data returned from Clearbit                |
 | person      | Person data returned form Clearbit                 |
 | message     | Used for deep link into an internal Admin/CRM      |
+| email       | Used to augment message data when Person not found |
 | given_name  | Used to augment message data when Person not found |
 | family_name | Used to augment message data when Person not found |
 
@@ -61,6 +62,7 @@ module APIHub
         if response.person || response.company
           params = {
             company: response.company,
+            email: customer.email,
             family_name: customer.last_name,
             given_name: customer.first_name,
             message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
@@ -91,6 +93,7 @@ class WebhooksController < ApplicationController
     if webhook.body.person || webhook.body.company
       params = {
         company: webhook.body.company,
+        email: customer.email,
         family_name: customer.last_name,
         given_name: customer.first_name,
         message: "View details in <https://admin-panel/#{webhook.webhook_id}|Admin Panel>",

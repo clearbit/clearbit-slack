@@ -19,7 +19,7 @@ describe Clearbit::Slack::Attachments::Company, '#as_json' do
         {:title=>"Employees", :value=>"10", :short=>true},
         {:title=>"AngelList", :value=>"<https://angel.co/clearbit|clearbit> (184 followers)", :short=>true},
         {:title=>"LinkedIn", :value=>"<https://www.linkedin.com/company/clearbit|company/clearbit>", :short=>true},
-        {:title=>"Twitter", :value=>"<http://twitter.com/clearbit|@clearbit> (271 followers)", :short=>true}
+        {:title=>"Twitter", :value=>"<http://twitter.com/clearbit|clearbit> (271 followers)", :short=>true}
       ]
     })
   end

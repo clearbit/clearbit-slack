@@ -53,8 +53,8 @@ module Clearbit
         Mash.new(
           email: email,
           name: {
-            given: given_name,
-            family: family_name
+            given_name: given_name,
+            family_name: family_name
           }
         )
       end

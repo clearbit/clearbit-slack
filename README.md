@@ -56,18 +56,18 @@ module APIHub
 
       def perform(customer_id)
         customer = Customer.find!(customer_id)
-        response = Clearbit::Enrichment.find(email: customer.email, stream: true)
+        result = Clearbit::Enrichment.find(email: customer.email, stream: true)
 
-        response.merge!(
+        result.merge!(
           email: customer.email,
           family_name: customer.last_name,
           given_name: customer.first_name,
           message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
         )
 
-        Clearbit::Slack.ping(response)
+        Clearbit::Slack.ping(result)
 
-        # Persist the Clearbit Data
+        # Save Clearbit data to datastore
       end
     end
   end
@@ -84,18 +84,18 @@ class WebhooksController < ApplicationController
   def clearbit
     webhook = Clearbit::Webhook.new(env)
     customer = Customer.find!(webhook.webhook_id)
-    response =  webhook.body
+    result =  webhook.body
 
-    response.merge!(
+    result.merge!(
       email: customer.email,
       family_name: customer.last_name,
       given_name: customer.first_name,
       message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
     )
 
-    Clearbit::Slack.ping(response)
+    Clearbit::Slack.ping(result)
 
-    # Persist the Clearbit Data
+    # Save Clearbit data to datastore
   end
 end
 ```

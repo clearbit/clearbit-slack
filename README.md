@@ -56,7 +56,7 @@ module APIHub
 
       def perform(customer_id)
         customer = Customer.find!(customer_id)
-        response = Clearbit::Streaming::PersonCompany[email: customer.email]
+        response = Clearbit::Enrichment.find(email: customer.email, stream: true)
 
         response.merge!(
           email: customer.email,

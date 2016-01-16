@@ -22,12 +22,11 @@ module Clearbit
           [
             bio,
             email,
-            employment,
-            position,
             location,
-            aboutme(person.aboutme),
-            angellist(person.angellist),
-            facebook(person.facebook),
+            employment,
+            title,
+            role,
+            seniority,
             linkedin(person.linkedin),
             twitter(person.twitter),
           ]
@@ -43,14 +42,24 @@ module Clearbit
           field 'Email', person.email
         end
 
+        def title
+          return unless person.employment && person.employment.title
+          field 'Title', person.employment.title
+        end
+
         def employment
           return unless person.employment && person.employment.name
           field 'Employment', person.employment.name
         end
 
-        def position
-          return unless person.employment && person.employment.title
-          field 'Position', person.employment.title
+        def role
+          return unless person.employment && person.employment.role
+          field 'Role', person.employment.role
+        end
+
+        def seniority
+          return unless person.employment && person.employment.seniority
+          field 'Seniority', person.employment.seniority
         end
 
         def location

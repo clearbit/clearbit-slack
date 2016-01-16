@@ -27,26 +27,15 @@ module Clearbit
 
         def fields
           [
-            website,
-            raised,
             location,
+            website,
             type,
+            raised,
             employees,
-            angellist(company.angellist),
-            facebook(company.facebook),
             linkedin(company.linkedin),
             twitter(company.twitter),
+            tech
           ]
-        end
-
-        def type
-          return unless company.type
-          field 'Type', company.type
-        end
-
-        def employees
-          return unless company.employees
-          field 'Employees', format_number(company.employees)
         end
 
         def location
@@ -59,9 +48,24 @@ module Clearbit
           field 'Website', company.url
         end
 
+        def type
+          return unless company.type
+          field 'Type', company.type
+        end
+
+        def employees
+          return unless company.employees
+          field 'Employees', format_number(company.employees)
+        end
+
         def raised
           return unless company.raised
           field 'Raised', "$#{format_number(company.raised)}"
+        end
+
+        def tech
+          return unless company.tech
+          field 'Tech', tech.join(', '), false
         end
       end
     end

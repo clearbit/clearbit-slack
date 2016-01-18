@@ -65,7 +65,7 @@ module Clearbit
 
         def tech
           return unless company.tech
-          field 'Tech', tech.join(', '), false
+          field 'Tech', company.tech.join(', '), false
         end
       end
     end

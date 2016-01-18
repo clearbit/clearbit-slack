@@ -74,5 +74,6 @@
   "type": "private",
   "ticker": null,
   "phone": null,
-  "personal": false
+  "personal": false,
+  "tech": ["google_analytics"]
 }

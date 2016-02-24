@@ -34,6 +34,7 @@ module Clearbit
             employees,
             linkedin(company.linkedin),
             twitter(company.twitter),
+            tags,
             tech
           ]
         end
@@ -54,13 +55,18 @@ module Clearbit
         end
 
         def employees
-          return unless company.employees
-          field 'Employees', format_number(company.employees)
+          return unless company.metrics.employees
+          field 'Employees', format_number(company.metrics.employees)
         end
 
         def raised
-          return unless company.raised
-          field 'Raised', "$#{format_number(company.raised)}"
+          return unless company.metrics.raised
+          field 'Raised', "$#{format_number(company.metrics.raised)}"
+        end
+
+        def tags
+          return unless company.tags
+          field 'Tech', company.tags.join(', '), false
         end
 
         def tech

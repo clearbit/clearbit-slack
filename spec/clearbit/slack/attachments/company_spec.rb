@@ -9,18 +9,19 @@ describe Clearbit::Slack::Attachments::Company, '#as_json' do
 
     expect(result).to eq({
       :author_name=>"Clearbit",
-      :author_icon=>"https://dqus23xyrtg1i.cloudfront.net/v1/logos/81be4a63-4c59-4fcd-82bd-3a5d8982d3ea",
-      :text=>"We are building a suite of business intelligence APIs to help companies find more information on their customers in order to increase sales and reduce fraud. Our goal is to be the data backbone for modern businesses, powering everything from credit checks to lead scoring.\n\nWe currently provide three APIs:\n\n- Person API: Takes an email address and returns information about a person such as name, avatar, title, and social accounts.\n- Company API: Takes a domain name and returns data about a company, such as name, logo, market category, and headcount.\n- Watchlist API: Lets you search names against a consolidate global watchlist, simplifying OFAC compliance.\n\nOur customers mainly use our APIs for lead-scoring, processing all their incoming leads through both the Person and Company APIs to determine which ones are valuable. This saves sales teams a great deal of time compared to manual lead research and qualification. ",
+      :author_icon=>"https://logo.clearbit.com/clearbit.com",
+      :text => "Clearbit provides powerful products and data APIs to help your business grow. Contact enrichment, lead generation, financial compliance, and more...",
       :color=>"good",
-      :fields=>[
-        {:title=>"Location", :value=>"601 4th Street #310, San Francisco, CA 94107, USA", :short=>true},
+      :fields => [
+        {:title=>"Location", :value=>"3030 16th St, San Francisco, CA 94103, USA", :short=>true},
         {:title=>"Website", :value=>"http://clearbit.com", :short=>true},
         {:title=>"Type", :value=>"private", :short=>true},
+        {:title=>"Raised", :value=>"$250,000", :short=>true},
         {:title=>"Employees", :value=>"10", :short=>true},
         {:title=>"LinkedIn", :value=>"<https://www.linkedin.com/company/clearbit|company/clearbit>", :short=>true},
-        {:title=>"Twitter", :value=>"<http://twitter.com/clearbit|clearbit> (271 followers)", :short=>true},
-        {:title=>"Tech", :value=>"google_analytics", :short=>false}
-      ]
+        {:title=>"Twitter", :value=>"<http://twitter.com/clearbit|clearbit> (616 followers)", :short=>true},
+        {:title=>"Tech", :value=>"Technology, Information Technology & Services", :short=>false},
+        {:title=>"Tech", :value=>"google_analytics, kiss_metrics, mixpanel, adroll, olark, typekit_by_adobe, perfect_audience, customer_io, intercom, google_apps, mailgun, mixpanel, aws_route_53, aws_ec2", :short=>false}]
     })
   end
 end

@@ -66,7 +66,7 @@ module Clearbit
 
         def tags
           return unless company.tags
-          field 'Tech', company.tags.join(', '), false
+          field 'Tags', company.tags.join(', '), false
         end
 
         def tech

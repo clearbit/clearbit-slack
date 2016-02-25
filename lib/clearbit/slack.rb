@@ -11,8 +11,8 @@ require 'clearbit/slack/attachments/company'
 
 module Clearbit
   module Slack
-    def self.ping(attrs = {})
-      Notifier.new(attrs).ping
+    def self.ping(attrs = {}, options = {})
+      Notifier.new(attrs, options).ping
     end
 
     def self.slack_url

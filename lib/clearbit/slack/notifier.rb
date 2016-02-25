@@ -1,18 +1,21 @@
 module Clearbit
   module Slack
     class Notifier
-      attr_reader :company, :message, :person, :given_name, :family_name, :email
-      attr_reader :slack_url, :slack_channel
+      attr_reader :company, :message, :person,
+                  :given_name, :family_name, :email,
+                  :slack_url, :slack_channel
 
-      def initialize(attrs = {})
+      def initialize(attrs = {}, options = {})
+        options = Slack.configuration.merge(options)
+
         @company       = attrs[:company]
         @message       = attrs[:message]
         @person        = attrs[:person]
         @given_name    = attrs[:given_name]
         @family_name   = attrs[:family_name]
         @email         = attrs[:email]
-        @slack_url     = attrs[:slack_url] || Slack.slack_url
-        @slack_channel = attrs[:slack_channel] || Slack.slack_channel
+        @slack_url     = options[:slack_url]
+        @slack_channel = options[:slack_channel]
       end
 
       def ping
@@ -29,7 +32,7 @@ module Clearbit
           attachments << Attachments::Company.new(company).as_json
         end
 
-        notifier.ping message.to_s, attachments: attachments
+        notifier.ping(message.to_s, attachments: attachments)
       end
 
       private

@@ -22,36 +22,21 @@ describe Clearbit::Slack::Notifier do
       expect(Slack::Notifier).to have_received(:new).with(
         'http://example', {
           channel: '#test',
-          icon_url: '',
-          username: 'Alex Maccaw'
+          icon_url: nil,
         }
       )
 
       expect(notifier).to have_received(:ping).with('message', attachments: [{
-        color: 'good',
+        :author_name=>nil,
+        :author_icon=>nil,
+        :text=>nil,
+        :color=>"good",
         fields: [{
           title: 'Email',
           value: 'alex@alexmaccaw.com',
           short: true
         }]
       }])
-    end
-  end
-
-  context 'person not found' do
-    it 'returns "Unknown" for username' do
-      params = { person: nil }
-
-      Clearbit::Slack::Notifier.new(params).ping
-
-      expect(Slack::Notifier).to have_received(:new).with(
-        'http://example', {
-          channel: '#test',
-          icon_url: '',
-          username: 'Unknown'
-        }
-      )
-      expect(notifier).to have_received(:ping)
     end
   end
 end

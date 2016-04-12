@@ -9,8 +9,10 @@ describe Clearbit::Slack::Attachments::Person, '#as_json' do
 
     expect(result).to eq({
       :color=>"good",
+      :author_icon => "https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/d54c54ad-40be-4305-8a34-0ab44710b90d",
+      :author_name => nil,
+      :text => "O'Reilly author, software engineer & traveller. Founder of https://clearbit.com",
       :fields=>[
-        {:title=>"Bio", :value=>"O'Reilly author, software engineer & traveller. Founder of https://clearbit.com", :short=>false},
         {:title=>"Email", :value=>"alex@alexmaccaw.com", :short=>true},
         {:title=>"Location", :value=>"San Francisco, CA, USA", :short=>true},
         {:title=>"Employment", :value=>"Clearbit", :short=>true},

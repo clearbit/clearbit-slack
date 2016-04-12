@@ -11,6 +11,9 @@ module Clearbit
 
         def as_json(options = {})
           {
+            author_name: person.name.full_name,
+            author_icon: person.avatar,
+            text: person.bio,
             color: color,
             fields: fields.compact
           }
@@ -20,7 +23,6 @@ module Clearbit
 
         def fields
           [
-            bio,
             email,
             location,
             employment,
@@ -30,11 +32,6 @@ module Clearbit
             linkedin(person.linkedin),
             twitter(person.twitter),
           ]
-        end
-
-        def bio
-          return unless person.bio
-          field 'Bio', person.bio, false
         end
 
         def email

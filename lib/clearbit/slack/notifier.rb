@@ -20,19 +20,27 @@ module Clearbit
       end
 
       def ping
-        notifier = ::Slack::Notifier.new(
+        notifier.ping(message.to_s, attachments: attachments)
+      end
+
+      def notifier
+        ::Slack::Notifier.new(
           slack_url,
           channel:  slack_channel,
           icon_url: slack_icon,
         )
+      end
 
-        attachments << Attachments::Person.new(person).as_json
+      def attachments
+        result = []
+
+        result << Attachments::Person.new(person).as_json
 
         if company
-          attachments << Attachments::Company.new(company).as_json
+          result << Attachments::Company.new(company).as_json
         end
 
-        notifier.ping(message.to_s, attachments: attachments)
+        result
       end
 
       private
@@ -49,10 +57,6 @@ module Clearbit
             family_name: family_name
           }
         )
-      end
-
-      def attachments
-        @attachments ||= []
       end
     end
   end

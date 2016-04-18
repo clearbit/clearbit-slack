@@ -11,6 +11,7 @@ module Clearbit
 
         def as_json(options = {})
           {
+            fallback: fallback,
             author_name: person.name.full_name,
             author_icon: person.avatar,
             text: person.bio,
@@ -20,6 +21,16 @@ module Clearbit
         end
 
         private
+
+        def fallback
+          str = person.email
+
+          if name = person.name.full_name
+            str << ' - %s' % name
+          end
+
+          str
+        end
 
         def fields
           [

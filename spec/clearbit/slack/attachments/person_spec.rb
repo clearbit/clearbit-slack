@@ -8,6 +8,7 @@ describe Clearbit::Slack::Attachments::Person, '#as_json' do
     result = Clearbit::Slack::Attachments::Person.new(person).as_json
 
     expect(result).to eq({
+      :fallback => "alex@alexmaccaw.com",
       :color=>"good",
       :author_icon => "https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/d54c54ad-40be-4305-8a34-0ab44710b90d",
       :author_name => nil,

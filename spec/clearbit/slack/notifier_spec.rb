@@ -27,6 +27,7 @@ describe Clearbit::Slack::Notifier do
       )
 
       expect(notifier).to have_received(:ping).with('message', attachments: [{
+        :fallback=>'alex@alexmaccaw.com',
         :author_name=>nil,
         :author_icon=>nil,
         :text=>nil,

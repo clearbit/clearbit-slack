@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'clearbit', '~> 0.2', '>= 0.2.2'
   spec.add_runtime_dependency 'maccman-mash', '~> 0.0', '>= 0.0.2'
-  spec.add_runtime_dependency 'slack-notifier', '~> 1.2', '>= 1.2.1'
+  spec.add_runtime_dependency 'slack-notifier', '~> 1.5.1', '>= 1.5.1'
 end

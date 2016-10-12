@@ -40,8 +40,7 @@ Sign up for a [Free Trial](https://clearbit.com/) if you don't already have a Cl
 | person      | Person data returned form Clearbit                 |
 | message     | Used for deep link into an internal Admin/CRM      |
 | email       | Used to augment message data when Person not found |
-| given_name  | Used to augment message data when Person not found |
-| family_name | Used to augment message data when Person not found |
+| full_name   | Used to augment message data when Person not found |
 
 ### Streaming API
 
@@ -60,8 +59,7 @@ module APIHub
 
         result.merge!(
           email: customer.email,
-          family_name: customer.last_name,
-          given_name: customer.first_name,
+          full_name: "#{customer.last_name} #{customer.first_name}",
           message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
         )
 
@@ -88,8 +86,7 @@ class WebhooksController < ApplicationController
 
     result.merge!(
       email: customer.email,
-      family_name: customer.last_name,
-      given_name: customer.first_name,
+      full_name: "#{customer.last_name} #{customer.first_name}",
       message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
     )
 

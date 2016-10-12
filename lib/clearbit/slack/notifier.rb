@@ -52,6 +52,7 @@ module Clearbit
       def unknown_person
         Mash.new(
           email: email,
+          bio: 'unknown person',
           name: {
             given_name: given_name,
             family_name: family_name

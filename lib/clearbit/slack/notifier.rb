@@ -2,7 +2,7 @@ module Clearbit
   module Slack
     class Notifier
       attr_reader :company, :message, :person,
-                  :given_name, :family_name, :email,
+                  :full_name, :email,
                   :slack_url, :slack_channel, :slack_icon
 
       def initialize(attrs = {}, options = {})
@@ -11,8 +11,7 @@ module Clearbit
         @company       = attrs[:company]
         @message       = attrs[:message]
         @person        = attrs[:person]
-        @given_name    = attrs[:given_name]
-        @family_name   = attrs[:family_name]
+        @full_name     = attrs[:full_name]
         @email         = attrs[:email]
         @slack_url     = options[:slack_url]
         @slack_channel = options[:slack_channel]
@@ -54,8 +53,7 @@ module Clearbit
           email: email,
           bio: 'unknown person',
           name: {
-            given_name: given_name,
-            family_name: family_name
+            full_name: full_name,
           }
         )
       end

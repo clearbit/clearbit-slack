@@ -11,8 +11,7 @@ describe Clearbit::Slack::Notifier do
     it 'returns the default values' do
       params = {
         person: nil,
-        given_name: 'Alex',
-        family_name: 'Maccaw',
+        full_name: 'Alex Maccaw',
         email: 'alex@alexmaccaw.com',
         message: 'message'
       }
@@ -27,14 +26,14 @@ describe Clearbit::Slack::Notifier do
       )
 
       expect(notifier).to have_received(:ping).with('message', attachments: [{
-        :fallback=>'alex@alexmaccaw.com',
-        :author_name=>nil,
+        :fallback=>'alex@alexmaccaw.com - Alex Maccaw',
+        :author_name=>'Alex Maccaw',
         :author_icon=>nil,
         :text=>'unknown person',
         :color=>"good",
         fields: [{
           title: 'Email',
-          value: 'alex@alexmaccaw.com',
+          value: 'alex@alexmaccaw.com - Alex Maccaw',
           short: true
         }]
       }])

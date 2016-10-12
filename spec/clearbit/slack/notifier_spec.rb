@@ -30,7 +30,7 @@ describe Clearbit::Slack::Notifier do
         :fallback=>'alex@alexmaccaw.com',
         :author_name=>nil,
         :author_icon=>nil,
-        :text=>nil,
+        :text=>'unknown person',
         :color=>"good",
         fields: [{
           title: 'Email',

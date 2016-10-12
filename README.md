@@ -59,7 +59,7 @@ module APIHub
 
         result.merge!(
           email: customer.email,
-          full_name: "#{customer.last_name} #{customer.first_name}",
+          full_name: "#{customer.first_name} #{customer.last_name}",
           message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
         )
 
@@ -86,7 +86,7 @@ class WebhooksController < ApplicationController
 
     result.merge!(
       email: customer.email,
-      full_name: "#{customer.last_name} #{customer.first_name}",
+      full_name: "#{customer.first_name} #{customer.last_name}",
       message: "View details in <https://admin-panel.com/#{customer.token}|Admin Panel>",
     )
 

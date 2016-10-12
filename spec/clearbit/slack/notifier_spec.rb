@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe Clearbit::Slack::Notifier do
+
+  let(:params) do
+    {
+      person: nil,
+      full_name: 'Alex Maccaw',
+      email: 'alex@alexmaccaw.com',
+      message: 'message'
+    }
+  end
+
   context 'default values for given_name and family_name' do
     let(:notifier) { double(ping: true) }
 
@@ -9,14 +19,6 @@ describe Clearbit::Slack::Notifier do
     end
 
     it 'returns the default values' do
-      params = {
-        person: nil,
-        given_name: 'Alex',
-        family_name: 'Maccaw',
-        email: 'alex@alexmaccaw.com',
-        message: 'message'
-      }
-
       Clearbit::Slack::Notifier.new(params).ping
 
       expect(Slack::Notifier).to have_received(:new).with(
@@ -27,14 +29,14 @@ describe Clearbit::Slack::Notifier do
       )
 
       expect(notifier).to have_received(:ping).with('message', attachments: [{
-        :fallback=>'alex@alexmaccaw.com',
-        :author_name=>nil,
+        :fallback=>'alex@alexmaccaw.com - Alex Maccaw',
+        :author_name=>'Alex Maccaw',
         :author_icon=>nil,
         :text=>'unknown person',
         :color=>"good",
         fields: [{
           title: 'Email',
-          value: 'alex@alexmaccaw.com',
+          value: 'alex@alexmaccaw.com - Alex Maccaw',
           short: true
         }]
       }])
@@ -44,14 +46,6 @@ describe Clearbit::Slack::Notifier do
   context 'integration test' do
     it 'the default values are able to be post to slack' do
       stub = stub_request(:post, 'example')
-
-      params = {
-        person: nil,
-        given_name: 'Alex',
-        family_name: 'Maccaw',
-        email: 'alex@alexmaccaw.com',
-        message: 'message'
-      }
 
       Clearbit::Slack::Notifier.new(params).ping
 

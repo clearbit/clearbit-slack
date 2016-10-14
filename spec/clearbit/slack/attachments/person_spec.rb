@@ -23,4 +23,20 @@ describe Clearbit::Slack::Attachments::Person, '#as_json' do
       ]
       })
   end
+
+  it 'returns text when the bio field is null in the payload' do
+    person_data = parsed_fixture_data 'person.json'
+
+    # simluate the bio being null in the payload
+    person_data["bio"] = nil
+
+    person = Mash.new(person_data)
+
+    result = Clearbit::Slack::Attachments::Person.new(person).as_json
+
+    # the text value in the payload needs to not be nil
+    expect(result).not_to include(
+      text: a_nil_value
+    )
+  end
 end

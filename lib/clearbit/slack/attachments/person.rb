@@ -14,7 +14,7 @@ module Clearbit
             fallback: fallback,
             author_name: person.name.full_name,
             author_icon: person.avatar,
-            text: person.bio,
+            text: person.bio.to_s,
             color: color,
             fields: fields.compact
           }

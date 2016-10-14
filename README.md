@@ -2,7 +2,7 @@
 
 Clean beautiful customer data. Now in Slack.
 
-![alex_test](https://cloud.githubusercontent.com/assets/739782/8149387/3f89cd68-1276-11e5-863c-5529237bfe6c.png)
+![alex test](https://cloud.githubusercontent.com/assets/739782/19399022/44627600-9204-11e6-9b80-447fb5685bad.png)
 
 ## Installation
 

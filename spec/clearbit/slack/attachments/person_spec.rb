@@ -35,8 +35,8 @@ describe Clearbit::Slack::Attachments::Person, '#as_json' do
     result = Clearbit::Slack::Attachments::Person.new(person).as_json
 
     # the text value in the payload needs to not be nil
-    expect(result).to match(
-      text: a_value != nil
+    expect(result).not_to include(
+      text: a_nil_value
     )
   end
 end

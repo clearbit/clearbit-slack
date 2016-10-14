@@ -17,7 +17,7 @@ describe Clearbit::Slack::Attachments::Company, '#as_json' do
           {
             :title => "Location",
             :value => "3030 16th St, San Francisco, CA 94103, USA",
-            :short => true
+            :short => false
           },
           {
             :title => "Website",

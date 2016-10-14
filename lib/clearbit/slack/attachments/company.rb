@@ -41,7 +41,7 @@ module Clearbit
 
         def location
           return unless company.location
-          field 'Location', company.location
+          field 'Location', company.location, false
         end
 
         def website

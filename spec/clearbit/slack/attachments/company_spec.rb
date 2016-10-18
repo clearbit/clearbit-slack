@@ -64,7 +64,7 @@ describe Clearbit::Slack::Attachments::Company, '#as_json' do
   end
 
   it 'returns text when the description field is null in the payload' do
-    # simluate the bio being null in the payload
+    # simluate the description being null in the payload
     company_data["description"] = nil
 
     # the text value in the payload needs to not be nil

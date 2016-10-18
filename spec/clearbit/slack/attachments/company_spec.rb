@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe Clearbit::Slack::Attachments::Company, '#as_json' do
+  let(:company_data) { parsed_fixture_data 'company.json' }
+  let(:company) { Mash.new(company_data) }
+  let(:result) { Clearbit::Slack::Attachments::Company.new(company).as_json }
+
   it 'returns a company attachment' do
-    company_data = parsed_fixture_data 'company.json'
-    company = Mash.new(company_data)
-
-    result = Clearbit::Slack::Attachments::Company.new(company).as_json
-
     expect(result).to include(
       {
         :author_name => "Clearbit",
@@ -61,6 +60,16 @@ describe Clearbit::Slack::Attachments::Company, '#as_json' do
           }
         ]
       }
+    )
+  end
+
+  it 'returns text when the description field is null in the payload' do
+    # simluate the bio being null in the payload
+    company_data["description"] = nil
+
+    # the text value in the payload needs to not be nil
+    expect(result).not_to include(
+      text: a_nil_value
     )
   end
 end

@@ -13,7 +13,7 @@ module Clearbit
           {
             author_name: company.name,
             author_icon: company.logo,
-            text: company.description,
+            text: company.description.to_s,
             color: color,
             fields: fields.compact
           }

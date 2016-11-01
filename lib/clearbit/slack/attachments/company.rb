@@ -55,12 +55,12 @@ module Clearbit
         end
 
         def employees
-          return unless company.metrics.employees
+          return unless company.metrics && company.metrics.employees
           field 'Employees', format_number(company.metrics.employees)
         end
 
         def raised
-          return unless company.metrics.raised
+          return unless company.metrics && company.metrics.raised
           field 'Raised', "$#{format_number(company.metrics.raised)}"
         end
 

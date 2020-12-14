@@ -25,8 +25,8 @@ module Clearbit
       def notifier
         ::Slack::Notifier.new(slack_url) do
           defaults(
-            channel: slack_channel,
-            icon_url: slack_icon
+            channel: @slack_channel,
+            icon_url: @slack_icon
           )
         end
       end

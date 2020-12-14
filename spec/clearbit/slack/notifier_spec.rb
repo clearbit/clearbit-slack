@@ -21,12 +21,14 @@ describe Clearbit::Slack::Notifier do
     it 'returns the default values' do
       Clearbit::Slack::Notifier.new(params).ping
 
-      expect(Slack::Notifier).to have_received(:new).with(
-        'http://example', {
-          channel: '#test',
-          icon_url: nil,
-        }
-      )
+      expect(Slack::Notifier).to have_received(:new).with('http://example') { |&block|
+        expect(block).to be(
+          default(
+            channel: '#test',
+            icon_url: nil
+          )
+        )
+      }
 
       expect(notifier).to have_received(:ping).with('message', attachments: [{
         :fallback=>'alex@alexmaccaw.com - Alex Maccaw',

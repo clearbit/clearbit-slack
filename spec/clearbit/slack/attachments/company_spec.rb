@@ -9,7 +9,7 @@ describe Clearbit::Slack::Attachments::Company, '#as_json' do
     expect(result).to include(
       {
         :author_name => "Clearbit",
-        :author_icon => "https://logo.clearbit.com/clearbit.com",
+        :author_icon => "https://brandbadge.clearbit.com/a114c279-67aa-4faa-beaf-64246a856450",
         :text => "Clearbit provides powerful products and data APIs to help your business grow. Contact enrichment, lead generation, financial compliance, and more...",
         :color => "good",
         :fields => [

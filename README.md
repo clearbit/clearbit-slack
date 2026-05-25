@@ -51,7 +51,7 @@ Lookup email using the Clearbit streaming API and ping Slack channel:
 module APIHub
   module Jobs
     class SignupNotification
-      include Sidekiq::Worker
+      include Sidekiq::Job
 
       def perform(customer_id)
         customer = Customer.find!(customer_id)
